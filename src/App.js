@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import CalendarBody from './components/CalendarBody/CalendarBody';
+import EventPreview from './components/EventPreview/EventPreview';
+import AddEvent from './components/AddEvent/AddEvent';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const today = new Date();
+  const [date, setDate] = useState(today);
+  const [eventList, setEventList] = useState(null)
+
+  useEffect(() => {
+    if (!eventList) {
+
+    fetch('http://localhost:3000/sportData.json')
+      .then((res) => {
+        console.log('res ', res)
+        const list = res.json()
+      setEventList(list)})
+    }
+  }, [eventList])
+  
+  console.log('eventList ', eventList)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='main'>
+      <h1 className="title">Calendar</h1>
+      <CalendarBody date={date} setDate={setDate} />
+      {/* <EventPreview /> */}
+      {/* <AddEvent /> */}
+      <div id="overlay"></div>
     </div>
   );
 }
