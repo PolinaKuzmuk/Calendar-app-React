@@ -4,6 +4,7 @@ import EventPreview from './components/EventPreview/EventPreview';
 import Overlay from './components/Overlay/Overlay';
 import AddEvent from './components/AddEvent/AddEvent';
 import { useState, useEffect } from 'react';
+import EventData from './components/EventData/EventData';
 
 function App() {
   const today = new Date();

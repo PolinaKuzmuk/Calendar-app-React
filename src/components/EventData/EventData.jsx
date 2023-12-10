@@ -1,23 +1,26 @@
-export const EventData = ({ data }) => {
+export default function EventData ({ data }) {
     if (!data) {
         return <p>Add an event.</p>
     }
     else {
-        return (Object.values(data).forEach((item) => {
-            // console.log('Object.entries(item)', Object.entries(item))
-            return (<ul>
-                {Object.entries(item).map(([key, value]) => {
-                    if (typeof value === 'object') {
-                        if (value === null) {
-                            return <ul key={key}>{key}: -</ul>
-                        }
-                        return <ul key={key}>{EventData(value)}</ul>
-                    } else {
-                        return <li key={key}>{key}: {value}</li>
-                    }
-                })}
-            </ul>)
-        })
-        )
+        return (
+            Object.entries(data).map(([key, value]) => (
+                <ul>
+                    <li key={key}>
+                        {typeof value === 'object' ? (
+                            value === null ? (
+                                `${key}: -`
+                            ) : (
+                                <>
+                                    {key}: <EventData data={value} />
+                                </>
+                            )
+                        ) : (
+                            `${key}: ${value}`
+                        )}
+                    </li>
+                </ul>
+            ))
+        );
     }
 }

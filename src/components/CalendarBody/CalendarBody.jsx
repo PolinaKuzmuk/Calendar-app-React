@@ -69,7 +69,7 @@ export default function CalendarBody({ date: currentDate, setDate, eventList, sh
                     const adjustedDate = `${currentYear}-${currentMonth < 10 ? '0' : ''}${currentMonth}-${day < 10 ? '0' : ''}${day}`
                     const hasEvent = adjustedEventList[adjustedDate]
                     const thisDay = `${new Date(currentYear, currentMonth, day)}`;
-                    return <div key={day} className={`day ${hasEvent ? 'is-event' : ''}`} style={day === 1 ? firstDayPosition : {}} onClick={() => {showPopup(true); setPopupData(hasEvent); setClickedDay(thisDay)}}>{day}</div>
+                    return <div key={day} className={`day ${hasEvent ? 'is-event' : ''}`} style={day === 1 ? firstDayPosition : {}} onClick={() => { showPopup(true); setPopupData(hasEvent); setClickedDay(thisDay) }}>{day}</div>
                 }
                 )
                 }

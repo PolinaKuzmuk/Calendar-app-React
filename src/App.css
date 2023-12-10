@@ -49,6 +49,9 @@
 }
 
 .btn-close {
+    position: sticky;
+    top: 5px;
+    right: 5px;
     display: block;
     margin-left: auto;
     width: 16px;
@@ -56,7 +59,7 @@
     cursor: pointer;
     background-size: contain;
     background-image: url('../public/img/close.svg');
-    background-color: #F0ECE5;
+    background-color: transparent;
     border: none;
     padding: 0;
 }
@@ -116,7 +119,6 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
-    cursor: pointer;
 }
 
 input[type=text] {
