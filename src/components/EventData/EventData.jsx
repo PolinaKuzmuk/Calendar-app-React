@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export default function EventData ({ data }) {
     if (!data) {
         return <p>Add an event.</p>
@@ -5,7 +7,7 @@ export default function EventData ({ data }) {
     else {
         return (
             Object.entries(data).map(([key, value]) => (
-                <ul>
+                <ul key={uuidv4()}>
                     <li key={key}>
                         {typeof value === 'object' ? (
                             value === null ? (
