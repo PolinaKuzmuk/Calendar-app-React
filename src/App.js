@@ -4,7 +4,6 @@ import EventPreview from './components/EventPreview/EventPreview';
 import Overlay from './components/Overlay/Overlay';
 import AddEvent from './components/AddEvent/AddEvent';
 import { useState, useEffect } from 'react';
-import EventData from './components/EventData/EventData';
 
 function App() {
   const today = new Date();
@@ -16,12 +15,10 @@ function App() {
   const [clickedDay, setClickedDay] = useState(null);
 
   useEffect(() => {
-    if (!eventList.length) {
-      fetch('https://raw.githubusercontent.com/PolinaKuzmuk/Calendar-app-React/main/src/sportData.json')
-        .then(res => res.json())
-        .then(res => setEventList(res.data))
-    }
-  }, [eventList])
+    fetch('https://raw.githubusercontent.com/PolinaKuzmuk/Calendar-app-React/main/src/sportData.json')
+      .then(res => res.json())
+      .then(res => setEventList(res.data))
+  }, [])
 
   return (
     <div className='main'>

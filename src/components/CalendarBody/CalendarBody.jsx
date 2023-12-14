@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 
 const monthArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Oktober', 'November', 'December'];
 const daysOfWeekArray = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -6,12 +6,12 @@ const daysOfWeekArray = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 export default function CalendarBody({ date: currentDate, setDate, eventList, showPopup, setPopupData, setClickedDay }) {
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
-    const daysInMonth = useMemo(() => new Date(currentYear, monthArr.indexOf(currentMonth - 1), 0).getDate(), [currentYear, currentMonth])
+    const daysInMonth = useMemo(() => new Date(currentYear, currentMonth, 0).getDate(), [currentYear, currentMonth]);
     const firstDay = useMemo(() => new Date(currentYear, currentMonth - 1, 1).getDay(), [currentYear, currentMonth]);
     const adjustedFirstDay = useMemo(() => firstDay === 0 ? 7 : firstDay, [firstDay]);
     const [daysArr, setDaysArr] = useState([])
 
-    function setNewMonth(value) {
+    const setNewMonth = useCallback((value) => {
         setDate(prevDate => {
             let currentMonthIndex = currentDate.getMonth();
             let year = prevDate.getFullYear();
@@ -26,7 +26,7 @@ export default function CalendarBody({ date: currentDate, setDate, eventList, sh
 
             return new Date(year, currentMonthIndex, 1);
         });
-    }
+    }, [currentDate, setDate])
 
     useEffect(() => {
         let daysArr = []
